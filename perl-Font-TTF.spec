@@ -4,7 +4,7 @@
 #
 Name     : perl-Font-TTF
 Version  : 1.06
-Release  : 8
+Release  : 9
 URL      : https://cpan.metacpan.org/authors/id/B/BH/BHALLISSY/Font-TTF-1.06.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/B/BH/BHALLISSY/Font-TTF-1.06.tar.gz
 Summary  : 'TTF font support for Perl'
