@@ -4,13 +4,14 @@
 #
 Name     : perl-Font-TTF
 Version  : 1.06
-Release  : 10
+Release  : 11
 URL      : https://cpan.metacpan.org/authors/id/B/BH/BHALLISSY/Font-TTF-1.06.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/B/BH/BHALLISSY/Font-TTF-1.06.tar.gz
 Summary  : 'TTF font support for Perl'
 Group    : Development/Tools
 License  : Artistic-2.0
 Requires: perl-Font-TTF-license = %{version}-%{release}
+Requires: perl-Font-TTF-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(IO::String)
 
@@ -26,6 +27,7 @@ writing of all other table types.
 Summary: dev components for the perl-Font-TTF package.
 Group: Development
 Provides: perl-Font-TTF-devel = %{version}-%{release}
+Requires: perl-Font-TTF = %{version}-%{release}
 
 %description dev
 dev components for the perl-Font-TTF package.
@@ -39,14 +41,24 @@ Group: Default
 license components for the perl-Font-TTF package.
 
 
+%package perl
+Summary: perl components for the perl-Font-TTF package.
+Group: Default
+Requires: perl-Font-TTF = %{version}-%{release}
+
+%description perl
+perl components for the perl-Font-TTF package.
+
+
 %prep
 %setup -q -n Font-TTF-1.06
+cd %{_builddir}/Font-TTF-1.06
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -56,7 +68,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -65,7 +77,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Font-TTF
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-Font-TTF/LICENSE
+cp %{_builddir}/Font-TTF-1.06/LICENSE %{buildroot}/usr/share/package-licenses/perl-Font-TTF/09aa60e68ba922665fa60c4169d550aa34a94c2e
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -78,84 +90,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/AATKern.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/AATutils.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Anchor.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Bsln.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Changes_old.txt
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Cmap.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Coverage.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Cvt_.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/DSIG.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Delta.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Dumper.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/EBDT.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/EBLC.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Fdsc.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Feat.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Features/Cvar.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Features/Size.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Features/Sset.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Fmtx.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Font.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Fpgm.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/GDEF.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/GPOS.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/GSUB.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Glat.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Gloc.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Glyf.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Glyph.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/GrFeat.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Hdmx.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Head.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Hhea.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Hmtx.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Kern.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Kern/ClassArray.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Kern/CompactClassArray.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Kern/OrderedList.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Kern/StateTable.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Kern/Subtable.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/LTSH.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Loca.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Manual.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Maxp.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Mort.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Mort/Chain.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Mort/Contextual.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Mort/Insertion.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Mort/Ligature.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Mort/Noncontextual.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Mort/Rearrangement.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Mort/Subtable.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Name.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/OS_2.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/OTTags.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/OldCmap.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/OldMort.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/PCLT.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/PSNames.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Post.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Prep.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Prop.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Segarr.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Silf.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Sill.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Table.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Ttc.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Ttopen.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Useall.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Utils.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Vhea.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Vmtx.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Win32.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Woff.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Woff/MetaData.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/Woff/PrivateData.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Font/TTF/XMLparse.pm
-/usr/lib/perl5/vendor_perl/5.28.2/ttfmod.pl
 
 %files dev
 %defattr(-,root,root,-)
@@ -239,4 +173,85 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-Font-TTF/LICENSE
+/usr/share/package-licenses/perl-Font-TTF/09aa60e68ba922665fa60c4169d550aa34a94c2e
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/AATKern.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/AATutils.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Anchor.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Bsln.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Changes_old.txt
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Cmap.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Coverage.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Cvt_.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/DSIG.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Delta.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Dumper.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/EBDT.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/EBLC.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Fdsc.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Feat.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Features/Cvar.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Features/Size.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Features/Sset.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Fmtx.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Font.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Fpgm.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/GDEF.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/GPOS.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/GSUB.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Glat.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Gloc.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Glyf.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Glyph.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/GrFeat.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Hdmx.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Head.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Hhea.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Hmtx.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Kern.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Kern/ClassArray.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Kern/CompactClassArray.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Kern/OrderedList.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Kern/StateTable.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Kern/Subtable.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/LTSH.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Loca.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Manual.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Maxp.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Mort.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Mort/Chain.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Mort/Contextual.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Mort/Insertion.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Mort/Ligature.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Mort/Noncontextual.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Mort/Rearrangement.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Mort/Subtable.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Name.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/OS_2.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/OTTags.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/OldCmap.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/OldMort.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/PCLT.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/PSNames.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Post.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Prep.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Prop.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Segarr.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Silf.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Sill.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Table.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Ttc.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Ttopen.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Useall.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Utils.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Vhea.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Vmtx.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Win32.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Woff.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Woff/MetaData.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/Woff/PrivateData.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Font/TTF/XMLparse.pm
+/usr/lib/perl5/vendor_perl/5.30.1/ttfmod.pl
